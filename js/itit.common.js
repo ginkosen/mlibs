@@ -133,7 +133,7 @@
             }
             iosOverlay({
                 text: message,
-                icon: "/images/common/alert.png",
+                icon: "./images/common/alert.png",
                 duration: 2e3
             });
         },
@@ -143,7 +143,7 @@
             }
             iosOverlay({
                 text: message,
-                icon: "/images/common/check.png",
+                icon: "./images/common/check.png",
                 duration: 2e3
             });
         },
@@ -153,7 +153,7 @@
             }
             iosOverlay({
                 text: message,
-                icon: "/images/common/alert.png",
+                icon: "./images/common/alert.png",
                 duration: 2e3
             });
         },
@@ -163,7 +163,7 @@
             }
             iosOverlay({
                 text: message,
-                icon: "/images/common/alert.png",
+                icon: "./images/common/alert.png",
                 duration: 2e3
             });
         },
@@ -173,7 +173,7 @@
             }
             iosOverlay({
                 text: message,
-                icon: "/images/common/cross.png",
+                icon: "./images/common/cross.png",
                 duration: 3e3
             });
         }

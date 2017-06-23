@@ -28,7 +28,8 @@
         this.args = {};
         this.headers = {};
         this.codes = {};
-        this.onproccess = undefined;
+        this.onprogress = undefined;
+        this.onbeforeInvoke = undefined;
         this.code = undefined;
         this.onsuccess = undefined;
         this.onerror = undefined;
@@ -111,7 +112,7 @@
             beforeInvoke: function () {
                 return true;
             },
-            proccess: function (proccess) {
+            progress: function (proccess) {
             },
             success: function (data) {
             },
@@ -176,7 +177,8 @@
         _this.args = {};
         _this.headers = {};
         _this.codes = {};
-        _this.onproccess = undefined;
+        _this.onprogress = undefined;
+        _this.onbeforeInvoke = undefined;
         _this.oncode = undefined;
         _this.onsuccess = undefined;
         _this.onerror = undefined;
@@ -190,6 +192,18 @@
     ITAjax.prototype.action = function (url) {
         var _this = this;
         _this.url = url;
+        return _this;
+    };
+    /**
+     * 设定url
+     * @param url
+     */
+    ITAjax.prototype.reqHeaders = function (headers) {
+        var _this = this;
+        if (typeof(headers) !== "object") {
+            return;
+        }
+        _this.headers = $.extend({}, _this.headers, headers);
         return _this;
     };
 
@@ -266,6 +280,26 @@
     };
 
     /**
+     * 调用完成回调
+     * @param callback
+     */
+    ITAjax.prototype.progress = function (callback) {
+        var _this = this;
+        _this.onprogress = callback;
+        return _this;
+    };
+
+    /**
+     * 调用完成回调
+     * @param callback
+     */
+    ITAjax.prototype.beforeInvoke = function (callback) {
+        var _this = this;
+        _this.onbeforeInvoke = callback;
+        return _this;
+    };
+
+    /**
      * 发起接口调用
      */
     ITAjax.prototype.invoke = function () {
@@ -281,9 +315,9 @@
         var _params = $.extend({}, ITAjax.options.defaults.args, _this.args);
         var _async = _this.async;
         var _codes = $.extend({}, ITAjax.options.defaults.codes, _this.codes);
-        var _proccess = _this.onproccess || ITAjax.options.callbacks.proccess || function (_process) {
+        var _progress = _this.onprogress || ITAjax.options.callbacks.progress || function (_process) {
             };
-        var _beforeInvoke = _this.onproccess || ITAjax.options.callbacks.beforeInvoke || function () {
+        var _beforeInvoke = _this.onbeforeInvoke || ITAjax.options.callbacks.beforeInvoke || function () {
                 return true;
             };
         var _code = _this.oncode || ITAjax.options.callbacks.code;
@@ -313,20 +347,20 @@
                 if (_silent) {
                     return;
                 }
-                _proccess(10);
+                _progress(10);
             },
             success: function (data) {
                 if (_silent === true) {
-                    _proccess(100);
+                    _progress(100);
                     return;
                 }
-                _proccess(60);
+                _progress(60);
                 var checked = _code(_codes, data);
                 if (checked) {
-                    _proccess(100);
+                    _progress(100);
                     return;
                 }
-                _proccess(80);
+                _progress(80);
                 if (typeof (_success) === "function") {
                     try {
                         _success.call(_this, data);
@@ -334,12 +368,12 @@
                         itit.logger.error("error ocur ", e);
                     }
                 }
-                _proccess(100);
+                _progress(100);
             },
             error: function (xhr, textStatus, errorThrown) {
                 if (_silent === true) {
                     itit.logger.error("error ", xhr);
-                    _proccess(100);
+                    _progress(100);
                     return;
                 }
                 if (typeof (_error) === "function") {
@@ -351,7 +385,7 @@
                 } else {
                     itit.logger.error("error ", xhr);
                 }
-                _proccess(100);
+                _progress(100);
             },
             complete: function (xhr, textStatus, statusCode) {
                 if (_silent === true) {

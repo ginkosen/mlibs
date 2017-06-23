@@ -18,9 +18,5 @@
  * @date 2016-10-23 20:01
  */
 !(function (window, $, itit) {
-    itit.keys = {
-        location: {
-            change: "changed@location.itit"
-        }
-    };
+    
 })(window, jQuery, window.itit);
