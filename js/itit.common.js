@@ -95,6 +95,9 @@
     };
     window.itit.store = store;
     window.itit.logger = new Logger("itit.log");
+    itit.isTypeOf = function (object, type) {
+        return typeof(object) === type;
+    };
     itit.request = function (_url) {
         if (!_url || _url.indexOf("?") < 0) {
             return {};
@@ -133,7 +136,7 @@
             }
             iosOverlay({
                 text: message,
-                icon: "./images/common/alert.png",
+                icon: "/images/common/alert.png",
                 duration: 2e3
             });
         },
@@ -143,7 +146,7 @@
             }
             iosOverlay({
                 text: message,
-                icon: "./images/common/check.png",
+                icon: "/images/common/check.png",
                 duration: 2e3
             });
         },
@@ -153,7 +156,7 @@
             }
             iosOverlay({
                 text: message,
-                icon: "./images/common/alert.png",
+                icon: "/images/common/alert.png",
                 duration: 2e3
             });
         },
@@ -163,7 +166,7 @@
             }
             iosOverlay({
                 text: message,
-                icon: "./images/common/alert.png",
+                icon: "/images/common/alert.png",
                 duration: 2e3
             });
         },
@@ -173,7 +176,7 @@
             }
             iosOverlay({
                 text: message,
-                icon: "./images/common/cross.png",
+                icon: "/images/common/cross.png",
                 duration: 3e3
             });
         }

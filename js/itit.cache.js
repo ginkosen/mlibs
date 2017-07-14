@@ -19,7 +19,7 @@
  */
 (function (window, itit) {
     var CacheModel = function () {
-        this.__keystore__ = "cached-tpbx-itit-" + window.cache.version;
+        this.__keystore__ = "cached-itit-" + window.cache.version;
         this.__init__();
     };
     CacheModel.prototype.__init__ = function () {

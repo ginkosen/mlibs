@@ -117,7 +117,6 @@
             success: function (data) {
             },
             error: function (xhr, textStatus, errorThrown, _url) {
-                var _this = this;
                 var data = {};
                 var _status = xhr.status;
                 _status = parseInt(_status);
@@ -166,7 +165,6 @@
      */
     ITAjax.prototype.__init__ = function () {
         var _this = this;
-        // _this.baseRes = "http://ddt-core-inf.sit.sf-express.com";
         _this.baseRes = "";
         _this.url = undefined;
         _this.timeout = ITAjax.options.defaults.timeout;
